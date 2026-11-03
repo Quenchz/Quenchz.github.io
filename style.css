@@ -34,3 +34,4 @@ hr { border: 0; border-top: 2px dashed var(--line); margin: 48px 0; }
 .hero p { font-size: 1.1rem; }
 .card { background: var(--panel); border-radius: 8px; padding: 16px 20px; margin: 20px 0; }
 footer { margin-top: 48px; font-size: .85rem; color: var(--muted); text-align: center; }
+.lang a.on { background: var(--accent); color: var(--bg); }

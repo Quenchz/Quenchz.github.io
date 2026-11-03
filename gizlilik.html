@@ -14,7 +14,7 @@
 <body>
 <main>
   <p><a href="./">← Ragebait</a></p>
-  <div class="lang"><a href="#tr">Türkçe</a><a href="#en">English</a></div>
+  <div class="lang"><a href="#tr" data-lang="tr">Türkçe</a><a href="#en" data-lang="en">English</a></div>
 
   <!-- ===================== TÜRKÇE ===================== -->
   <section id="tr" lang="tr">
@@ -68,8 +68,6 @@
     <h2>8. İletişim</h2>
     <p><a href="mailto:ragebaitgame@gmail.com">ragebaitgame@gmail.com</a></p>
   </section>
-
-  <hr>
 
   <!-- ===================== ENGLISH ===================== -->
   <section id="en" lang="en">
@@ -126,5 +124,28 @@
 
   <footer>© 2026 Berkay Erhan Yaldız · <a href="./">Ragebait</a></footer>
 </main>
+<script>
+(function () {
+  var secs = { tr: document.getElementById('tr'), en: document.getElementById('en') };
+  var btns = document.querySelectorAll('.lang a');
+  function show(l) {
+    if (!secs[l]) l = 'tr';
+    for (var k in secs) secs[k].hidden = (k !== l);
+    btns.forEach(function (b) { b.classList.toggle('on', b.dataset.lang === l); });
+    document.documentElement.lang = l;
+    document.title = l === 'tr' ? 'Ragebait Gizlilik Politikası' : 'Ragebait Privacy Policy';
+  }
+  var h = location.hash.slice(1);
+  var nav = (navigator.language || '').toLowerCase();
+  show(h === 'tr' || h === 'en' ? h : (nav.indexOf('tr') === 0 ? 'tr' : 'en'));
+  btns.forEach(function (b) {
+    b.addEventListener('click', function (e) {
+      e.preventDefault(); show(b.dataset.lang);
+      try { history.replaceState(null, '', '#' + b.dataset.lang); } catch (x) {}
+      window.scrollTo(0, 0);
+    });
+  });
+})();
+</script>
 </body>
 </html>
